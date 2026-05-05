@@ -23,14 +23,15 @@ export default function App() {
   const [step, setStep] = useState(STEP_INTRO);
   const [mood, setMood] = useState(null);
   const [zone, setZone] = useState(null);
-  const [sowDate, setSowDate] = useState("");
+  const todayISO = new Date().toISOString().split("T")[0];
+  const [sowDate, setSowDate] = useState(todayISO);
   const [acceptedBasket, setAcceptedBasket] = useState(null);
 
   function restart() {
     setStep(STEP_INTRO);
     setMood(null);
     setZone(null);
-    setSowDate("");
+    setSowDate(new Date().toISOString().split("T")[0]);
     setAcceptedBasket(null);
   }
 
@@ -62,7 +63,7 @@ export default function App() {
         </main>
       ) : (
         <main className="main-content">
-          <ProgressBar step={step} />
+          <ProgressBar step={step} onNavigate={setStep} />
 
           {step === STEP_INTRO && (
             <Intro onStart={() => setStep(STEP_MOOD)} />

@@ -1,12 +1,27 @@
-import { buildSchedule, formatDate } from "../../utils/scheduleCalc";
+import { buildSchedule, formatDate, getActualSowDate } from "../../utils/scheduleCalc";
 import { exportSchedulePDF } from "../../utils/pdfExport";
-import { ZONES } from "../../data/flowers";
+import { ZONES, LAST_FROST } from "../../data/flowers";
 import { moods } from "../../data/moods";
+
+const MONTH_NAMES = [
+  "January","February","March","April","May","June",
+  "July","August","September","October","November","December"
+];
 
 export default function GrowScheduleStep({ basket, zone, sowDate, mood, onNext, onBack }) {
   const schedule = buildSchedule(basket, sowDate, zone);
   const zoneLabel = ZONES.find((z) => z.id === zone)?.label || zone;
   const moodLabel = moods.find((m) => m.id === mood)?.label || mood;
+  const actualSowDate = getActualSowDate(sowDate);
+
+  const frost = LAST_FROST[zone];
+  const frostDate = frost
+    ? new Date(actualSowDate.getFullYear(), frost.month, frost.day)
+    : null;
+  const frostLabel = frost
+    ? `${MONTH_NAMES[frost.month]} ${frost.day}`
+    : null;
+  const frostHasPassed = frostDate ? new Date() > frostDate : true;
 
   function handleDownload() {
     exportSchedulePDF(schedule, moodLabel, zoneLabel, sowDate);
@@ -16,8 +31,24 @@ export default function GrowScheduleStep({ basket, zone, sowDate, mood, onNext, 
     <div className="step-container schedule-container">
       <h2 className="step-title">Your Grow Schedule</h2>
       <p className="step-sub">
-        {moodLabel} · {zoneLabel} · Sow date: {sowDate}
+        {moodLabel} · {zoneLabel} · Sow date: {formatDate(actualSowDate)}
       </p>
+
+      {frostLabel && (
+        <div className={`frost-banner ${frostHasPassed ? "frost-banner--passed" : "frost-banner--upcoming"}`}>
+          {frostHasPassed ? (
+            <>
+              <span className="frost-banner-icon">✓</span>
+              <span>Last frost for {zoneLabel} was around <strong>{frostLabel}</strong> — it has passed for this year.</span>
+            </>
+          ) : (
+            <>
+              <span className="frost-banner-icon">❄</span>
+              <span>Last frost for {zoneLabel} is around <strong>{frostLabel}</strong> — plan indoor starts accordingly.</span>
+            </>
+          )}
+        </div>
+      )}
 
       <div className="schedule-list">
         {schedule.map(({ flower, actualSowDate, bloomDate, indoorStart, weeksToBloom }) => (
@@ -44,9 +75,17 @@ export default function GrowScheduleStep({ basket, zone, sowDate, mood, onNext, 
             </div>
 
             {indoorStart && (
-              <div className="indoor-flag">
-                🌱 Start indoors — outdoor sow date is before last frost for your zone.
-              </div>
+              <>
+                <div className="indoor-flag">
+                  🌱 Start indoors — sow date is before last frost for your zone. Starting early indoors gives these seeds the best head start.
+                </div>
+                <div className="indoor-flag-alt">
+                  {frostHasPassed
+                    ? "✓ Last frost has passed — skip the indoor phase entirely. Direct sow into the basket or into seed trays kept outside."
+                    : `Once last frost passes (around ${frostLabel}), you can skip the indoor phase and direct sow outside instead.`
+                  }
+                </div>
+              </>
             )}
 
             <div className="care-facts">

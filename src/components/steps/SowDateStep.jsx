@@ -16,27 +16,38 @@ export default function SowDateStep({ sowDate, zone, onSowDate, onNext, onBack }
     <div className="step-container">
       <h2 className="step-title">When do you want to sow?</h2>
       <p className="step-sub">
-        Enter the date you plan to sow. We'll add 7 days for shipping so your
-        seeds arrive ready to plant.
+        Enter your sow date. We'll add 7 days for shipping — that's your actual
+        plant date.
       </p>
 
-      <div className="date-input-wrap">
-        <label htmlFor="sowDate" className="date-label">Sow Date</label>
-        <input
-          id="sowDate"
-          type="date"
-          className="date-input"
-          value={sowDate}
-          onChange={(e) => onSowDate(e.target.value)}
-        />
+      <div className="sow-date-fields">
+        <div className="date-field-group">
+          <label htmlFor="sowDate" className="date-label">Your Sow Date</label>
+          <input
+            id="sowDate"
+            type="date"
+            className="date-input"
+            value={sowDate}
+            onChange={(e) => onSowDate(e.target.value)}
+          />
+        </div>
+
+        <div className="date-field-divider">+7 days shipping</div>
+
+        <div className="date-field-group">
+          <label className="date-label">Actual Plant Date</label>
+          <input
+            type="text"
+            className="date-input date-input-readonly"
+            value={actualSowDate ? formatDate(actualSowDate) : "—"}
+            readOnly
+            tabIndex={-1}
+          />
+        </div>
       </div>
 
       {actualSowDate && (
         <div className="date-info-box">
-          <div className="date-info-row">
-            <span className="date-info-label">Actual sow date</span>
-            <span className="date-info-value">{formatDate(actualSowDate)}</span>
-          </div>
           <div className="date-info-row">
             <span className="date-info-label">Growing season</span>
             <span className="date-info-value season-badge">{bloomSeason}</span>
@@ -47,15 +58,6 @@ export default function SowDateStep({ sowDate, zone, onSowDate, onNext, onBack }
               <span className="date-info-value">
                 Some flowers will need to be started indoors. Indoor start dates
                 will be shown in your grow schedule.
-              </span>
-            </div>
-          )}
-          {(zone === "indoor-window" || zone === "indoor-grow-light") && (
-            <div className="date-info-row indoor-note">
-              <span className="date-info-label">🌱 Indoor growing</span>
-              <span className="date-info-value">
-                All flowers will be grown indoors. Indoor-specific care notes
-                will appear in your schedule.
               </span>
             </div>
           )}

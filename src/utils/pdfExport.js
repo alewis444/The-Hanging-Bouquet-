@@ -7,7 +7,6 @@ export function exportSchedulePDF(schedule, moodLabel, zoneLabel, sowDateString)
   const pageWidth = doc.internal.pageSize.getWidth();
   let y = margin;
 
-  // Header
   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
   doc.text("The Hanging Bouquet", margin, y);
@@ -18,12 +17,10 @@ export function exportSchedulePDF(schedule, moodLabel, zoneLabel, sowDateString)
   doc.text(`Mood: ${moodLabel}   ·   Zone: ${zoneLabel}   ·   Sow Date: ${sowDateString}`, margin, y);
   y += 30;
 
-  // Divider
   doc.setDrawColor(180, 180, 180);
   doc.line(margin, y, pageWidth - margin, y);
   y += 20;
 
-  // Table header
   const colWidths = [160, 90, 90, 90, 85];
   const headers = ["Flower", "Sow Date", "Weeks to Bloom", "Bloom Date", "Indoor Start?"];
 
@@ -38,7 +35,6 @@ export function exportSchedulePDF(schedule, moodLabel, zoneLabel, sowDateString)
   doc.line(margin, y, pageWidth - margin, y);
   y += 14;
 
-  // Table rows
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
   schedule.forEach(({ flower, actualSowDate, bloomDate, indoorStart }) => {
@@ -56,7 +52,6 @@ export function exportSchedulePDF(schedule, moodLabel, zoneLabel, sowDateString)
     });
     y += 18;
 
-    // Care facts
     doc.setFontSize(8);
     doc.setTextColor(100, 100, 100);
     doc.text(`  ☀ ${flower.sunlight}   💧 ${flower.watering}`, margin + 8, y);
@@ -69,7 +64,6 @@ export function exportSchedulePDF(schedule, moodLabel, zoneLabel, sowDateString)
     doc.setTextColor(0, 0, 0);
     y += 4;
 
-    // Page break if needed
     if (y > 700) {
       doc.addPage();
       y = margin;

@@ -74,6 +74,29 @@
   position: relative;
 }
 
+.progress-crumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: default;
+}
+
+.progress-step.done .progress-crumb {
+  cursor: pointer;
+}
+
+.progress-step.done .progress-crumb:hover .progress-dot {
+  background: var(--green);
+}
+
+.progress-step.done .progress-crumb:hover .progress-label {
+  color: var(--green);
+  text-decoration: underline;
+}
+
 .progress-dot {
   width: 10px;
   height: 10px;
@@ -246,6 +269,71 @@
 .mood-label { font-size: 15px; font-weight: 700; color: var(--text); }
 .mood-tagline { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
 
+/* ─── Zip Lookup ──────────────────────────────────── */
+.zip-lookup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.zip-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.zip-input {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  font-size: 15px;
+  width: 120px;
+  letter-spacing: 0.08em;
+}
+
+.zip-input:focus { outline: 2px solid var(--green); outline-offset: 2px; }
+
+.zip-btn {
+  padding: 10px 18px;
+  background: var(--parchment);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bark);
+  transition: background 0.15s;
+}
+
+.zip-btn:hover:not(:disabled) { background: var(--blush); }
+.zip-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.zip-result {
+  font-size: 14px;
+  color: var(--green);
+  font-weight: 500;
+  padding: 8px 12px;
+  background: color-mix(in srgb, var(--green) 8%, white);
+  border-radius: var(--radius-sm);
+}
+
+.zip-error {
+  font-size: 13px;
+  color: #b04040;
+  padding: 8px 12px;
+  background: #fdf0f0;
+  border-radius: var(--radius-sm);
+}
+
+.zone-manual-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: -8px;
+}
+
 /* ─── Zone Grid ───────────────────────────────────── */
 .zone-grid {
   display: grid;
@@ -267,6 +355,23 @@
 
 .zone-card:hover { border-color: var(--green-light); background: var(--parchment); }
 .zone-card.selected { border-color: var(--green); background: color-mix(in srgb, var(--green) 8%, white); font-weight: 700; color: var(--green); }
+
+.frost-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--parchment);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+
+.frost-info-zone { font-weight: 700; color: var(--green); }
+.frost-info-divider { color: var(--border); }
+.frost-info-label { color: var(--text-muted); }
+.frost-info-date { font-weight: 700; color: var(--bark); }
 
 /* ─── Sow Date Step ───────────────────────────────── */
 .date-input-wrap {
@@ -294,6 +399,37 @@
 }
 
 .date-input:focus { outline: 2px solid var(--green); outline-offset: 2px; }
+
+.sow-date-fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.date-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.date-field-divider {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-bottom: 12px;
+  white-space: nowrap;
+}
+
+.date-input-readonly {
+  background: var(--parchment);
+  color: var(--green);
+  font-weight: 700;
+  cursor: default;
+  border-color: var(--border);
+}
 
 .date-info-box {
   background: var(--parchment);
@@ -392,8 +528,9 @@
 .flower-pill-info {
   display: flex;
   align-items: baseline;
-  gap: 10px;
+  gap: 6px 10px;
   flex-wrap: wrap;
+  flex: 1;
 }
 
 .flower-pill-role {
@@ -409,6 +546,8 @@
 
 .flower-pill-name { font-size: 14px; font-weight: 600; color: var(--text); }
 .flower-pill-latin { font-size: 12px; color: var(--text-muted); font-style: italic; }
+.flower-pill-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; width: 100%; }
+.flower-pill-duration { font-size: 11px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.04em; }
 
 .swap-btn {
   font-size: 16px;
@@ -463,12 +602,98 @@
   font-size: 13px;
 }
 
+.bloom-header { border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 2px; }
+.bloom-header span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 700; }
 .bloom-flower-name { font-weight: 600; min-width: 160px; }
 .bloom-arrow { color: var(--text-muted); }
 .bloom-date { color: var(--green); font-weight: 600; }
 .bloom-weeks { color: var(--text-muted); font-size: 12px; }
 
 .btn-accept { margin-top: 4px; align-self: flex-end; }
+
+/* ─── Basket Mood Tabs ────────────────────────────── */
+.basket-mood-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.basket-mood-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  background: var(--white);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.basket-mood-tab:hover {
+  border-color: var(--tab-color, var(--green-light));
+  color: var(--text);
+}
+
+.basket-mood-tab.active {
+  border-color: var(--tab-color, var(--green));
+  background: color-mix(in srgb, var(--tab-color, var(--green)) 10%, white);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.basket-mood-tab-emoji { font-size: 15px; }
+.basket-mood-tab-label { white-space: nowrap; }
+
+.basket-mood-tagline {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: -8px;
+}
+
+.basket-bloom-note {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.basket-empty {
+  background: var(--parchment);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  font-size: 14px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ─── Frost Banner ────────────────────────────────── */
+.frost-banner {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  border: 1px solid;
+}
+
+.frost-banner--passed {
+  background: color-mix(in srgb, var(--green) 8%, white);
+  border-color: var(--green-light);
+  color: var(--green);
+}
+
+.frost-banner--upcoming {
+  background: #eef4fb;
+  border-color: #b0c8e0;
+  color: #2d5a8a;
+}
+
+.frost-banner-icon { font-size: 15px; flex-shrink: 0; }
 
 /* ─── Grow Schedule ───────────────────────────────── */
 .schedule-container { gap: 24px; }
@@ -527,10 +752,21 @@
 .indoor-flag {
   background: color-mix(in srgb, var(--green) 8%, white);
   border: 1px solid var(--green-light);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   padding: 10px 14px;
   font-size: 13px;
   color: var(--green);
+  font-weight: 500;
+}
+
+.indoor-flag-alt {
+  background: #eef4fb;
+  border: 1px solid #b0c8e0;
+  border-top: none;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #2d5a8a;
   font-weight: 500;
 }
 
@@ -590,6 +826,37 @@
 }
 
 .congrats-note { font-size: 14px; color: var(--text-muted); font-style: italic; }
+
+.congrats-dates {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: var(--parchment);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 28px;
+  min-width: 280px;
+}
+
+.congrats-date-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+}
+
+.congrats-date-row--highlight .congrats-date-value { color: var(--bark); font-weight: 800; }
+.congrats-date-row--bloom .congrats-date-value { color: var(--green); font-weight: 800; font-size: 15px; }
+
+.congrats-date-label { font-size: 13px; color: var(--text-muted); }
+.congrats-date-value { font-size: 14px; font-weight: 600; color: var(--text); }
+
+.congrats-date-arrow {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
 
 /* ─── Library ─────────────────────────────────────── */
 .library-container {

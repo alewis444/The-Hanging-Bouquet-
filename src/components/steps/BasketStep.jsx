@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { generateBaskets, getBackups } from "../../utils/basketGenerator";
 import { getActualSowDate, getBloomDate, formatDate } from "../../utils/scheduleCalc";
+import { moods } from "../../data/moods";
 
 const ROLE_LABEL = { upright: "Thriller", mounder: "Filler", trailer: "Spiller" };
 
@@ -14,6 +15,12 @@ function FlowerPill({ flower, onSwap, backups }) {
           <span className="flower-pill-role">{ROLE_LABEL[flower.role]}</span>
           <span className="flower-pill-name">{flower.name}</span>
           <span className="flower-pill-latin">{flower.latin}</span>
+          {flower.description && (
+            <span className="flower-pill-desc">{flower.description}</span>
+          )}
+          {flower.bloomDuration && (
+            <span className="flower-pill-duration">Blooms for {flower.bloomDuration}</span>
+          )}
         </div>
         <button
           className="swap-btn"
@@ -49,17 +56,19 @@ function FlowerPill({ flower, onSwap, backups }) {
   );
 }
 
-export default function BasketStep({ mood, zone, sowDate, onAccept, onBack }) {
+export default function BasketStep({ mood: initialMood, zone, sowDate, onAccept, onBack }) {
+  const [activeMood, setActiveMood] = useState(initialMood);
   const [baskets, setBaskets] = useState([]);
   const [editedBaskets, setEditedBaskets] = useState([]);
 
   const actualSowDate = getActualSowDate(sowDate);
+  const activeMoodData = moods.find((m) => m.id === activeMood);
 
   useEffect(() => {
-    const generated = generateBaskets(mood, zone, sowDate);
+    const generated = generateBaskets(activeMood, zone, sowDate);
     setBaskets(generated);
     setEditedBaskets(generated.map((b) => [...b]));
-  }, [mood, zone, sowDate]);
+  }, [activeMood, zone, sowDate]);
 
   function swapFlower(basketIdx, oldFlowerId, newFlower) {
     setEditedBaskets((prev) =>
@@ -70,78 +79,94 @@ export default function BasketStep({ mood, zone, sowDate, onAccept, onBack }) {
     );
   }
 
-  if (baskets.length === 0) {
-    return (
-      <div className="step-container">
-        <h2 className="step-title">No baskets found</h2>
-        <p className="step-sub">
-          Not enough flowers match your mood, zone, and season. Try a different
-          combination.
-        </p>
-        <button className="btn-secondary" onClick={onBack}>← Back</button>
-      </div>
-    );
-  }
-
   return (
     <div className="step-container">
       <h2 className="step-title">Your curated baskets</h2>
-      <p className="step-sub">
-        Each basket blooms together around{" "}
-        <strong>
-          {formatDate(
-            getBloomDate(
-              editedBaskets[0]?.[0],
-              actualSowDate
-            )
-          )}
-        </strong>
-        . Swap any flower using the ⇄ button.
-      </p>
 
-      <div className="baskets-list">
-        {editedBaskets.map((basket, idx) => {
-          const backups = getBackups(basket, mood, zone, sowDate);
-          return (
-            <div key={idx} className="basket-card">
-              <div className="basket-card-header">
-                <span className="basket-number">Basket {idx + 1}</span>
-                <span className="basket-count">{basket.length} flowers</span>
-              </div>
-              <div className="basket-flowers">
-                {basket.map((flower) => (
-                  <FlowerPill
-                    key={flower.id}
-                    flower={flower}
-                    backups={backups}
-                    onSwap={(oldId, newFlower) =>
-                      swapFlower(idx, oldId, newFlower)
-                    }
-                  />
-                ))}
-              </div>
-              <div className="basket-bloom-preview">
-                {basket.map((f) => (
-                  <div key={f.id} className="bloom-row">
-                    <span className="bloom-flower-name">{f.name}</span>
-                    <span className="bloom-arrow">→</span>
-                    <span className="bloom-date">
-                      {formatDate(getBloomDate(f, actualSowDate))}
-                    </span>
-                    <span className="bloom-weeks">({f.weeksToBloom} wks)</span>
-                  </div>
-                ))}
-              </div>
-              <button
-                className="btn-primary btn-accept"
-                onClick={() => onAccept(basket)}
-              >
-                Accept Basket {idx + 1} →
-              </button>
-            </div>
-          );
-        })}
+      {/* Mood tabs */}
+      <div className="basket-mood-tabs">
+        {moods.map((m) => (
+          <button
+            key={m.id}
+            className={`basket-mood-tab ${activeMood === m.id ? "active" : ""}`}
+            style={{ "--tab-color": m.palette[0] }}
+            onClick={() => setActiveMood(m.id)}
+          >
+            <span className="basket-mood-tab-emoji">{m.emoji}</span>
+            <span className="basket-mood-tab-label">{m.label}</span>
+          </button>
+        ))}
       </div>
+
+      {activeMoodData && (
+        <p className="basket-mood-tagline">
+          <strong>{activeMoodData.label}:</strong> {activeMoodData.tagline}
+        </p>
+      )}
+
+      {baskets.length === 0 ? (
+        <div className="basket-empty">
+          No baskets available for <strong>{activeMoodData?.label}</strong> in your zone and season.
+          Try a different mood above.
+        </div>
+      ) : (
+        <>
+          {editedBaskets[0]?.[0] && (
+            <p className="basket-bloom-note">
+              If you start sowing{" "}
+              <strong>{formatDate(actualSowDate)}</strong>, blooms together around{" "}
+              <strong>{formatDate(getBloomDate(editedBaskets[0][0], actualSowDate))}</strong>.{" "}
+              Swap any flower using the ⇄ button, then accept the basket you love.
+            </p>
+          )}
+
+          <div className="baskets-list">
+            {editedBaskets.map((basket, idx) => {
+              const backups = getBackups(basket, activeMood, zone, sowDate);
+              return (
+                <div key={idx} className="basket-card">
+                  <div className="basket-card-header">
+                    <span className="basket-number">Basket {idx + 1}</span>
+                    <span className="basket-count">{basket.length} flowers</span>
+                  </div>
+                  <div className="basket-flowers">
+                    {basket.map((flower) => (
+                      <FlowerPill
+                        key={flower.id}
+                        flower={flower}
+                        backups={backups}
+                        onSwap={(oldId, newFlower) => swapFlower(idx, oldId, newFlower)}
+                      />
+                    ))}
+                  </div>
+                  <div className="basket-bloom-preview">
+                    <div className="bloom-row bloom-header">
+                      <span className="bloom-flower-name">Flower</span>
+                      <span className="bloom-arrow" />
+                      <span className="bloom-date">Bloom Date</span>
+                      <span className="bloom-weeks" />
+                    </div>
+                    {basket.map((f) => (
+                      <div key={f.id} className="bloom-row">
+                        <span className="bloom-flower-name">{f.name}</span>
+                        <span className="bloom-arrow">→</span>
+                        <span className="bloom-date">{formatDate(getBloomDate(f, actualSowDate))}</span>
+                        <span className="bloom-weeks">({f.weeksToBloom} wks)</span>
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    className="btn-primary btn-accept"
+                    onClick={() => onAccept(basket)}
+                  >
+                    Accept Basket {idx + 1} →
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
 
       <button className="btn-secondary" onClick={onBack}>← Back</button>
     </div>
