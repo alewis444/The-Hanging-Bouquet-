@@ -355,6 +355,7 @@
 
 .zone-card:hover { border-color: var(--green-light); background: var(--parchment); }
 .zone-card.selected { border-color: var(--green); background: color-mix(in srgb, var(--green) 8%, white); font-weight: 700; color: var(--green); }
+.zone-card:disabled, .zone-card.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
 
 .frost-info {
   display: flex;
@@ -976,3 +977,374 @@
 .season-summer  { background: #fff9c4; color: #7a6000; }
 .season-autumn  { background: #fbe9e7; color: #8c3a00; }
 .season-winter  { background: #e3f2fd; color: #1a4f7a; }
+
+/* ── Home Page ── */
+.home-page {
+  padding: 0 0 60px 0;
+}
+
+.home-zone-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0 20px 0;
+  flex-wrap: wrap;
+}
+
+.home-zone-badge {
+  background: var(--green);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.home-zone-sub {
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+.home-mood-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.home-mood-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  background: var(--white);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.home-mood-tab:hover {
+  border-color: var(--green-light);
+  background: var(--parchment);
+}
+
+.home-mood-tab.active {
+  border-color: var(--green);
+  background: color-mix(in srgb, var(--green) 8%, white);
+  font-weight: 700;
+  color: var(--green);
+}
+
+.home-mood-emoji { font-size: 18px; }
+.home-mood-label { font-size: 13px; }
+
+.home-mood-tagline {
+  color: var(--text-light);
+  font-size: 13px;
+  font-style: italic;
+  margin: 0 0 20px 0;
+}
+
+.home-date-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.home-date-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.home-date-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-light);
+}
+
+.home-date-arrow {
+  font-size: 12px;
+  color: var(--text-light);
+  padding-bottom: 10px;
+}
+
+.home-season-pill {
+  background: var(--parchment);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+/* ── Basket Row ── */
+.hb-baskets-row {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  align-items: flex-start;
+}
+
+.hb-basket-card {
+  flex: 0 0 320px;
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.hb-basket-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  background: var(--parchment);
+}
+
+.hb-basket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px 4px 16px;
+}
+
+.hb-basket-num {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.hb-basket-count {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* ── Flower List (in basket card) ── */
+.hb-flower-list {
+  padding: 8px 16px 0 16px;
+}
+
+.hb-flower-row-wrap {
+  margin-bottom: 2px;
+}
+
+.hb-flower-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.hb-flower-thumb {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--parchment);
+}
+
+.hb-flower-name {
+  font-size: 13px;
+  color: var(--text);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hb-swap-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 6px;
+  color: var(--text-light);
+  flex-shrink: 0;
+  transition: border-color 0.15s;
+}
+
+.hb-swap-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.hb-swap-dropdown {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  margin: 4px 0 8px 44px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.hb-swap-hint {
+  font-size: 11px;
+  color: var(--text-light);
+  margin: 0 0 6px 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.hb-swap-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text);
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.hb-swap-option:hover {
+  background: var(--parchment);
+}
+
+.hb-swap-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ── Bloom dates (compact) ── */
+.hb-bloom-row {
+  padding: 8px 16px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+.hb-bloom-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-light);
+  padding: 1px 0;
+}
+
+.hb-bloom-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60%;
+}
+
+.hb-bloom-date {
+  font-variant-numeric: tabular-nums;
+  color: var(--green);
+  font-weight: 500;
+}
+
+.hb-accept-btn {
+  width: calc(100% - 32px);
+  margin: 12px 16px 16px 16px;
+}
+
+/* ── Library Card Grid ── */
+.lib-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.lib-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: box-shadow 0.15s;
+}
+
+.lib-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.lib-card-img-wrap {
+  width: 100%;
+  height: 160px;
+  background: var(--parchment);
+  overflow: hidden;
+}
+
+.lib-card-img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lib-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lib-card-body {
+  padding: 12px;
+}
+
+.lib-card-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.lib-card-latin {
+  font-size: 11px;
+  color: var(--text-light);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.lib-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.lib-card-weeks {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.lib-card-seasons {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.lib-card-desc {
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.5;
+}

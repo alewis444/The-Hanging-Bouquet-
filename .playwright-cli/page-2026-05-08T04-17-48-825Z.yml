@@ -1,0 +1,159 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: 🌸 The Hanging Bouquet
+      - generic [ref=e7]:
+        - button "Builder" [ref=e8] [cursor=pointer]
+        - button "Library" [ref=e9] [cursor=pointer]
+  - main [ref=e10]:
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]: Zones 9–10
+        - generic [ref=e14]: Season-matched basket recommendations for your grow zone
+      - generic [ref=e15]:
+        - button "🐝 Pollinator" [ref=e16] [cursor=pointer]:
+          - generic [ref=e17]: 🐝
+          - generic [ref=e18]: Pollinator
+        - button "🌸 Romantic" [ref=e19] [cursor=pointer]:
+          - generic [ref=e20]: 🌸
+          - generic [ref=e21]: Romantic
+        - button "🌿 Wild" [ref=e22] [cursor=pointer]:
+          - generic [ref=e23]: 🌿
+          - generic [ref=e24]: Wild
+        - button "🌾 Apothecary" [ref=e25] [cursor=pointer]:
+          - generic [ref=e26]: 🌾
+          - generic [ref=e27]: Apothecary
+        - button "🌑 Moody" [ref=e28] [cursor=pointer]:
+          - generic [ref=e29]: 🌑
+          - generic [ref=e30]: Moody
+        - button "🌻 Joyful" [ref=e31] [cursor=pointer]:
+          - generic [ref=e32]: 🌻
+          - generic [ref=e33]: Joyful
+      - paragraph [ref=e34]: For the bees, the butterflies, and every winged visitor.
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - generic [ref=e37]: Sow date
+          - textbox [ref=e38]: 2026-05-08
+        - generic [ref=e39]: → +7 days shipping
+        - generic [ref=e40]:
+          - generic [ref=e41]: Plant date
+          - textbox [ref=e42]: May 15, 2026
+        - generic [ref=e43]: 🌱 Spring
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - img "Basket 1" [ref=e46]
+          - generic [ref=e47]:
+            - generic [ref=e48]: Basket 1
+            - generic [ref=e49]: 5 flowers
+          - generic [ref=e50]:
+            - generic [ref=e52]:
+              - generic [ref=e53]: Thriller
+              - generic [ref=e54]: Verbena
+              - button "⇄" [ref=e55] [cursor=pointer]
+            - generic [ref=e57]:
+              - generic [ref=e58]: Filler
+              - generic [ref=e59]: Gomphrena Sequin
+              - button "⇄" [ref=e60] [cursor=pointer]
+            - generic [ref=e62]:
+              - generic [ref=e63]: Filler
+              - generic [ref=e64]: Annual Phlox Dwarf Mix
+              - button "⇄" [ref=e65] [cursor=pointer]
+            - generic [ref=e67]:
+              - generic [ref=e68]: Spiller
+              - generic [ref=e69]: Petunia Easy Wave® Blue
+            - generic [ref=e71]:
+              - generic [ref=e72]: Spiller
+              - generic [ref=e73]: Sweet Alyssum
+          - generic [ref=e74]:
+            - generic [ref=e75]:
+              - generic [ref=e76]: Verbena
+              - generic [ref=e77]: → August 21, 2026
+            - generic [ref=e78]:
+              - generic [ref=e79]: Gomphrena Sequin
+              - generic [ref=e80]: → July 31, 2026
+            - generic [ref=e81]:
+              - generic [ref=e82]: Annual Phlox Dwarf Mix
+              - generic [ref=e83]: → July 17, 2026
+            - generic [ref=e84]:
+              - generic [ref=e85]: Petunia Easy Wave® Blue
+              - generic [ref=e86]: → July 31, 2026
+            - generic [ref=e87]:
+              - generic [ref=e88]: Sweet Alyssum
+              - generic [ref=e89]: → July 3, 2026
+          - button "Accept Basket 1 →" [ref=e90] [cursor=pointer]
+        - generic [ref=e91]:
+          - img "Basket 2" [ref=e92]
+          - generic [ref=e93]:
+            - generic [ref=e94]: Basket 2
+            - generic [ref=e95]: 5 flowers
+          - generic [ref=e96]:
+            - generic [ref=e98]:
+              - generic [ref=e99]: Thriller
+              - generic [ref=e100]: Statice Pastel Mix
+              - button "⇄" [ref=e101] [cursor=pointer]
+            - generic [ref=e103]:
+              - generic [ref=e104]: Filler
+              - generic [ref=e105]: Gomphrena Strawberry Fair
+              - button "⇄" [ref=e106] [cursor=pointer]
+            - generic [ref=e108]:
+              - generic [ref=e109]: Filler
+              - generic [ref=e110]: Zinnia Linearis Mix
+              - button "⇄" [ref=e111] [cursor=pointer]
+            - generic [ref=e113]:
+              - generic [ref=e114]: Spiller
+              - generic [ref=e115]: Morning Glory Heavenly Blue
+            - generic [ref=e117]:
+              - generic [ref=e118]: Spiller
+              - generic [ref=e119]: Morning Glory Scarlet O'Hara (Pink)
+          - generic [ref=e120]:
+            - generic [ref=e121]:
+              - generic [ref=e122]: Statice Pastel Mix
+              - generic [ref=e123]: → July 31, 2026
+            - generic [ref=e124]:
+              - generic [ref=e125]: Gomphrena Strawberry Fair
+              - generic [ref=e126]: → July 31, 2026
+            - generic [ref=e127]:
+              - generic [ref=e128]: Zinnia Linearis Mix
+              - generic [ref=e129]: → July 10, 2026
+            - generic [ref=e130]:
+              - generic [ref=e131]: Morning Glory Heavenly Blue
+              - generic [ref=e132]: → July 24, 2026
+            - generic [ref=e133]:
+              - generic [ref=e134]: Morning Glory Scarlet O'Hara (Pink)
+              - generic [ref=e135]: → July 24, 2026
+          - button "Accept Basket 2 →" [ref=e136] [cursor=pointer]
+        - generic [ref=e137]:
+          - img "Basket 3" [ref=e138]
+          - generic [ref=e139]:
+            - generic [ref=e140]: Basket 3
+            - generic [ref=e141]: 4 flowers
+          - generic [ref=e142]:
+            - generic [ref=e144]:
+              - generic [ref=e145]: Thriller
+              - generic [ref=e146]: Salvia Victoria Blue
+              - button "⇄" [ref=e147] [cursor=pointer]
+            - generic [ref=e149]:
+              - generic [ref=e150]: Filler
+              - generic [ref=e151]: Marigold Yellow (Petite Gold)
+              - button "⇄" [ref=e152] [cursor=pointer]
+            - generic [ref=e154]:
+              - generic [ref=e155]: Filler
+              - generic [ref=e156]: Cosmos Dwarf Early Rose
+              - button "⇄" [ref=e157] [cursor=pointer]
+            - generic [ref=e159]:
+              - generic [ref=e160]: Spiller
+              - generic [ref=e161]: Lobelia Starship Rose
+          - generic [ref=e162]:
+            - generic [ref=e163]:
+              - generic [ref=e164]: Salvia Victoria Blue
+              - generic [ref=e165]: → August 14, 2026
+            - generic [ref=e166]:
+              - generic [ref=e167]: Marigold Yellow (Petite Gold)
+              - generic [ref=e168]: → July 10, 2026
+            - generic [ref=e169]:
+              - generic [ref=e170]: Cosmos Dwarf Early Rose
+              - generic [ref=e171]: → July 17, 2026
+            - generic [ref=e172]:
+              - generic [ref=e173]: Lobelia Starship Rose
+              - generic [ref=e174]: → August 14, 2026
+          - button "Accept Basket 3 →" [ref=e175] [cursor=pointer]

@@ -88,15 +88,19 @@ export default function ZoneStep({ selected, onSelect, onNext, onBack }) {
 
       <p className="zone-manual-label">Or select manually:</p>
       <div className="zone-grid">
-        {ZONES.map((zone) => (
-          <button
-            key={zone.id}
-            className={`zone-card ${selected === zone.id ? "selected" : ""}`}
-            onClick={() => onSelect(zone.id)}
-          >
-            {zone.label}
-          </button>
-        ))}
+        {ZONES.map((zone) => {
+          const disabled = zone.id !== "9-10";
+          return (
+            <button
+              key={zone.id}
+              className={`zone-card ${selected === zone.id ? "selected" : ""} ${disabled ? "disabled" : ""}`}
+              onClick={() => !disabled && onSelect(zone.id)}
+              disabled={disabled}
+            >
+              {zone.label}
+            </button>
+          );
+        })}
       </div>
 
       {selected && frostDate && (

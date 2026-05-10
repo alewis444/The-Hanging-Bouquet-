@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { flowers, ZONES, SEASONS } from "../data/flowers";
+import { flowers, ZONES, FLOWER_IMAGES } from "../data/flowers";
 
 const ROLE_LABEL = { upright: "Thriller", mounder: "Filler", trailer: "Spiller" };
 
@@ -10,12 +10,9 @@ export default function Library() {
   const [search, setSearch] = useState("");
 
   const filtered = flowers.filter((f) => {
-    const matchSeason =
-      filterSeason === "all" || f.seasons.includes(filterSeason);
-    const matchZone =
-      filterZone === "all" || f.zones.includes(filterZone);
-    const matchRole =
-      filterRole === "all" || f.role === filterRole;
+    const matchSeason = filterSeason === "all" || f.seasons.includes(filterSeason);
+    const matchZone = filterZone === "all" || f.zones.includes(filterZone);
+    const matchRole = filterRole === "all" || f.role === filterRole;
     const matchSearch =
       search === "" ||
       f.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -74,32 +71,34 @@ export default function Library() {
 
       <div className="library-count">{filtered.length} flowers</div>
 
-      <div className="library-table">
-        <div className="library-table-header">
-          <span>Name</span>
-          <span>Role</span>
-          <span>Type</span>
-          <span>Seasons</span>
-          <span>Weeks to Bloom</span>
-        </div>
+      <div className="lib-card-grid">
         {filtered.map((f) => (
-          <div key={f.id} className="library-table-row">
-            <div className="lib-name-cell">
-              <span className="lib-name">{f.name}</span>
-              <span className="lib-latin">{f.latin}</span>
+          <div key={f.id} className="lib-card">
+            <div className="lib-card-img-wrap">
+              <img
+                src={FLOWER_IMAGES[f.id]}
+                alt={f.name}
+                className="lib-card-img"
+                onError={(e) => {
+                  e.target.style.display = "none";
+                  e.target.parentElement.classList.add("lib-card-img-placeholder");
+                }}
+              />
             </div>
-            <span className={`role-badge role-${f.role}`}>
-              {ROLE_LABEL[f.role]}
-            </span>
-            <span className="lib-type">{f.type}</span>
-            <div className="lib-seasons">
-              {f.seasons.map((s) => (
-                <span key={s} className={`season-chip season-${s}`}>
-                  {s}
-                </span>
-              ))}
+            <div className="lib-card-body">
+              <div className="lib-card-name">{f.name}</div>
+              <div className="lib-card-latin">{f.latin}</div>
+              <div className="lib-card-meta">
+                <span className={`role-badge role-${f.role}`}>{ROLE_LABEL[f.role]}</span>
+                <span className="lib-card-weeks">{f.weeksToBloom} wks</span>
+              </div>
+              <div className="lib-card-seasons">
+                {f.seasons.map((s) => (
+                  <span key={s} className={`season-chip season-${s}`}>{s}</span>
+                ))}
+              </div>
+              <div className="lib-card-desc">{f.description}</div>
             </div>
-            <span className="lib-weeks">{f.weeksToBloom} wks</span>
           </div>
         ))}
       </div>
